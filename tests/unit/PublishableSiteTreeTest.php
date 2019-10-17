@@ -19,7 +19,7 @@ class PublishableSiteTreeTest extends SapphireTest {
 
 	function testObjectsToUpdateOnPublish() {
 
-		$parent = Object::create('PublishableSiteTreeTest_Publishable');
+		$parent = SS_Object::create('PublishableSiteTreeTest_Publishable');
 		$parent->Title = 'parent';
 
 		$stub = $this->getMock(
@@ -43,7 +43,7 @@ class PublishableSiteTreeTest extends SapphireTest {
 
 	function testObjectsToUpdateOnUnpublish() {
 
-		$parent = Object::create('PublishableSiteTreeTest_Publishable');
+		$parent = SS_Object::create('PublishableSiteTreeTest_Publishable');
 		$parent->Title = 'parent';
 
 		$stub = $this->getMock(
@@ -67,7 +67,7 @@ class PublishableSiteTreeTest extends SapphireTest {
 
 	function testObjectsToDeleteOnPublish() {
 
-		$stub = Object::create('PublishableSiteTreeTest_Publishable');
+		$stub = SS_Object::create('PublishableSiteTreeTest_Publishable');
 		$objects = $stub->objectsToDelete(array('action' => 'publish'));
 		$this->assertEquals($objects->column('Title'), array(), 'Deletes nothing on publish');
 
@@ -75,7 +75,7 @@ class PublishableSiteTreeTest extends SapphireTest {
 
 	function testObjectsToDeleteOnUnpublish() {
 
-		$stub = Object::create('PublishableSiteTreeTest_Publishable');
+		$stub = SS_Object::create('PublishableSiteTreeTest_Publishable');
 		$stub->Title = 'stub';
 		$objects = $stub->objectsToDelete(array('action' => 'unpublish'));
 		$this->assertEquals($objects->column('Title'), array('stub'), 'Deletes itself on unpublish');
@@ -84,7 +84,7 @@ class PublishableSiteTreeTest extends SapphireTest {
 
 	function testObjectsToUpdateOnPublishIfVirtualExists() {
 
-		$redir = Object::create('PublishableSiteTreeTest_Publishable');
+		$redir = SS_Object::create('PublishableSiteTreeTest_Publishable');
 		$redir->Title = 'virtual';
 
 		$stub = $this->getMock(
@@ -106,7 +106,7 @@ class PublishableSiteTreeTest extends SapphireTest {
 
 	function testObjectsToDeleteOnUnpublishIfVirtualExists() {
 
-		$redir = Object::create('PublishableSiteTreeTest_Publishable');
+		$redir = SS_Object::create('PublishableSiteTreeTest_Publishable');
 		$redir->Title = 'virtual';
 
 		$stub = $this->getMock(

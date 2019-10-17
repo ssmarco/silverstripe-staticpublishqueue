@@ -23,10 +23,10 @@ class SiteTreePublishingEngineTest extends SapphireTest {
 		Config::inst()->unnest();
 		parent::tearDown();
 	}
-	
+
 	function testCollectChangesForPublishing() {
 
-		$obj = Object::create('SiteTreePublishingEngineTest_StaticPublishingTrigger');
+		$obj = SS_Object::create('SiteTreePublishingEngineTest_StaticPublishingTrigger');
 		$obj->collectChanges(array('action'=>'publish'));
 
 		$this->assertEquals(
@@ -42,7 +42,7 @@ class SiteTreePublishingEngineTest extends SapphireTest {
 
 	function testCollectChangesForUnpublishing() {
 
-		$obj = Object::create('SiteTreePublishingEngineTest_StaticPublishingTrigger');
+		$obj = SS_Object::create('SiteTreePublishingEngineTest_StaticPublishingTrigger');
 		$obj->collectChanges(array('action'=>'unpublish'));
 
 		$this->assertEquals(
@@ -122,7 +122,7 @@ class SiteTreePublishingEngineTest extends SapphireTest {
 
 		$urls = array('/xyzzy');
 
-		$stub = Object::create('SiteTreePublishingEngineTest_StaticPublishingTrigger');
+		$stub = SS_Object::create('SiteTreePublishingEngineTest_StaticPublishingTrigger');
 
 		// Test (inclusively with urlsToPaths, these interfaces should be refactored together)
 		$result = $stub->convertUrlsToPathMap($urls);
@@ -148,7 +148,7 @@ class SiteTreePublishingEngineTest extends SapphireTest {
 			->method('hasExtension')
 			->will($this->returnValue(true));
 
-		$stub = Object::create('SiteTreePublishingEngineTest_StaticPublishingTrigger');
+		$stub = SS_Object::create('SiteTreePublishingEngineTest_StaticPublishingTrigger');
 
 		$stub->setUrlArrayObject($this->getMock('URLArrayObject', array('getObject')));
 		$stub->getUrlArrayObject()->expects($this->any())
@@ -180,7 +180,7 @@ class SiteTreePublishingEngineTest extends SapphireTest {
 		$domain2 = $this->getMock('SubsiteDomain_mock', array('Domain'));
 		$domain2->Domain = 'subiste2.domain.org';
 
-		$domains = Object::create('ArrayList', array($domain1, $domain2));
+		$domains = SS_Object::create('ArrayList', array($domain1, $domain2));
 
 		$subsite = $this->getMock('Subsite_mock', array('Domains', 'ID'));
 		$subsite->expects($this->any())
@@ -258,7 +258,7 @@ class SiteTreePublishingEngineTest_StaticallyPublishable extends SiteTree implem
 class SiteTreePublishingEngineTest_StaticPublishingTrigger extends SiteTree implements TestOnly, StaticPublishingTrigger {
 
 	public function generatePublishable($url, $prio) {
-		$obj = Object::create('SiteTreePublishingEngineTest_StaticallyPublishable');
+		$obj = SS_Object::create('SiteTreePublishingEngineTest_StaticallyPublishable');
 		$obj->url = $url;
 		$obj->prio = $prio;
 
