@@ -220,19 +220,21 @@ class FilesystemPublisher extends DataExtension {
 				user_error("Bad url:" . var_export($url,true), E_USER_WARNING);
 				continue;
 			}
-			
+
 			if(Config::inst()->get('FilesystemPublisher', 'echo_progress')) {
 				echo " * Publishing page $i/$totalURLs: $url\n";
 				flush();
 			}
 
 			Requirements::clear();
-			
+
 			if($url == "") $url = "/";
 			if(Director::is_relative_url($url)) $url = Director::absoluteURL($url);
 			$sanitizedURL = URLArrayObject::sanitize_url($url);
+			$currentReadingMode = Versioned::get_reading_mode();
+			Versioned::set_default_reading_mode(Versioned::DEFAULT_MODE);
 			$response = Director::test(str_replace('+', ' ', $sanitizedURL));
-
+			Versioned::set_default_reading_mode($currentReadingMode);
 			if($response) {
 				$result[$origUrl]['statuscode'] = $response->getStatusCode();
 			}
